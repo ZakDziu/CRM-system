@@ -5,9 +5,10 @@ import (
 	"crm-system/pkg/logger"
 	"crm-system/pkg/model"
 	"crm-system/pkg/store/postgresstore"
+	"testing"
+
 	"github.com/stretchr/testify/suite"
 	"gorm.io/gorm"
-	"testing"
 
 	_ "github.com/joho/godotenv/autoload"
 )
@@ -30,7 +31,7 @@ func (s *StoreSuite) SetupSuite() {
 	if err != nil {
 		logger.Fatalf("Can't read config file: %s", err.Error())
 	}
-	conf := cf.DB
+	conf := cf.DBPostgresConfig
 
 	db, err := postgresstore.NewPostgresStore(&conf)
 	s.Nil(err)

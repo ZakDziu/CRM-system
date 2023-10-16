@@ -5,19 +5,24 @@ import (
 	"crm-system/pkg/store/postgresstore"
 )
 
+type Store struct {
+	Postgres PostgresStore
+}
+
 type PostgresStore struct {
 	User UserRepository
 	Auth AuthRepository
 }
 
-func NewPostgres(conf *config.DBPostgresConfig) (*PostgresStore, error) {
-	postgres, err := postgresstore.NewPostgresStore(conf)
+func NewStore(conf *config.Configs) (*Store, error) {
+	postgres, err := postgresstore.NewPostgresStore(&conf.DBPostgresConfig)
 	if err != nil {
 		return nil, err
 	}
 
-	return &PostgresStore{
-		User: postgres.User(),
-		Auth: postgres.Auth(),
+	return &Store{
+		Postgres: PostgresStore{
+			User: postgres.User(),
+			Auth: postgres.Auth()},
 	}, nil
 }

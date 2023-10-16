@@ -6,9 +6,9 @@ import (
 )
 
 type Configs struct {
-	DB     DBPostgresConfig
-	Server ServerConfig
-	Keys   Path
+	DBPostgresConfig DBPostgresConfig
+	Server           ServerConfig
+	Keys             Path
 }
 
 type DBPostgresConfig struct {

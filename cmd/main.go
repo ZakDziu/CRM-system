@@ -48,14 +48,14 @@ func main() {
 		logger.Fatalf("main.go--->main()--->LoadRefKey: %s", err)
 	}
 
-	postgresStore, err := store.NewPostgres(&conf.DB)
+	storeDB, err := store.NewStore(conf)
 	if err != nil {
-		logger.Fatalf("main.go--->main()--->NewPostgres: %s", err)
+		logger.Fatalf("main.go--->main()--->NewStore: %s", err)
 	}
 
-	middleware := appauth.NewAuthMiddleware(postgresStore, atKey, rtKey)
+	middleware := appauth.NewAuthMiddleware(&storeDB.Postgres, atKey, rtKey)
 
-	apiServer := api.NewServer(&conf.Server, postgresStore, middleware)
+	apiServer := api.NewServer(&conf.Server, &storeDB.Postgres, middleware)
 	runErr := make(chan error, 1)
 	quitCh := make(chan os.Signal, 1)
 	signal.Notify(quitCh, syscall.SIGINT, syscall.SIGTERM)
