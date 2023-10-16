@@ -513,7 +513,7 @@ func TestAuthHandlers(t *testing.T) {
 	mockAuthMiddleware := mockauthmiddleware.NewMockAuthMiddleware(mockCtrl)
 	repos = append(repos, mockAuthMiddleware)
 
-	mockPostgresStore := &store.PostgresStore{}
+	mockPostgresStore := &store.Store{}
 
 	testAPI := initTestAPI(t, mockAuthMiddleware, mockPostgresStore)
 	mockAuthMiddleware.EXPECT().Authorize(gomock.Any()).Return().AnyTimes()

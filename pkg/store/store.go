@@ -6,10 +6,6 @@ import (
 )
 
 type Store struct {
-	Postgres PostgresStore
-}
-
-type PostgresStore struct {
 	User UserRepository
 	Auth AuthRepository
 }
@@ -21,8 +17,7 @@ func NewStore(conf *config.Configs) (*Store, error) {
 	}
 
 	return &Store{
-		Postgres: PostgresStore{
-			User: postgres.User(),
-			Auth: postgres.Auth()},
+		User: postgres.User(),
+		Auth: postgres.Auth(),
 	}, nil
 }

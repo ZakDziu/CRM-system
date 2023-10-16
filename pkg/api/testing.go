@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func initTestAPI(t *testing.T, middleware authmiddleware.AuthMiddleware, postgres *store.PostgresStore) *api {
+func initTestAPI(t *testing.T, middleware authmiddleware.AuthMiddleware, postgres *store.Store) *api {
 	t.Helper()
 
 	gin.SetMode(gin.ReleaseMode)

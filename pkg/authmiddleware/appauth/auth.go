@@ -20,13 +20,13 @@ import (
 const StringsNumber = 2
 
 type AuthMiddleware struct {
-	postgres *store.PostgresStore
+	postgres *store.Store
 	loc      *time.Location
 	atKey    *ecdsa.PrivateKey
 	rtKey    *ecdsa.PrivateKey
 }
 
-func NewAuthMiddleware(postgres *store.PostgresStore, atKey, rtKey *ecdsa.PrivateKey) *AuthMiddleware {
+func NewAuthMiddleware(postgres *store.Store, atKey, rtKey *ecdsa.PrivateKey) *AuthMiddleware {
 	loc, _ := time.LoadLocation("Europe/Moscow")
 	var middleware = &AuthMiddleware{
 		loc:      loc,

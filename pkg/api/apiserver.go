@@ -18,7 +18,7 @@ type Server struct {
 }
 
 type api struct {
-	postgresStore *store.PostgresStore
+	postgresStore *store.Store
 	router        *gin.Engine
 	config        *config.ServerConfig
 	auth          authmiddleware.AuthMiddleware
@@ -29,7 +29,7 @@ type api struct {
 
 func NewServer(
 	config *config.ServerConfig,
-	postgresStore *store.PostgresStore,
+	postgresStore *store.Store,
 	auth authmiddleware.AuthMiddleware,
 ) *Server {
 	handler := newAPI(config, postgresStore, auth)
@@ -47,7 +47,7 @@ func NewServer(
 
 func newAPI(
 	config *config.ServerConfig,
-	postgresStore *store.PostgresStore,
+	postgresStore *store.Store,
 	auth authmiddleware.AuthMiddleware,
 ) *api {
 	api := &api{

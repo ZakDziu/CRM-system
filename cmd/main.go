@@ -53,9 +53,9 @@ func main() {
 		logger.Fatalf("main.go--->main()--->NewStore: %s", err)
 	}
 
-	middleware := appauth.NewAuthMiddleware(&storeDB.Postgres, atKey, rtKey)
+	middleware := appauth.NewAuthMiddleware(storeDB, atKey, rtKey)
 
-	apiServer := api.NewServer(&conf.Server, &storeDB.Postgres, middleware)
+	apiServer := api.NewServer(&conf.Server, storeDB, middleware)
 	runErr := make(chan error, 1)
 	quitCh := make(chan os.Signal, 1)
 	signal.Notify(quitCh, syscall.SIGINT, syscall.SIGTERM)
