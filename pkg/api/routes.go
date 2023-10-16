@@ -6,15 +6,12 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"net/http"
-
-	mw "github.com/tel-io/instrumentation/middleware/gin"
 )
 
 func configureRouter(api *api) *gin.Engine {
 	router := gin.Default()
 
 	router.Use(CORSMiddleware())
-	router.Use(mw.ServerMiddlewareAll())
 
 	public := router.Group("api/v1")
 

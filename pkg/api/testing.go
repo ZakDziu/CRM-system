@@ -4,8 +4,10 @@ package api
 import (
 	"crm-system/pkg/authmiddleware"
 	"crm-system/pkg/store"
-	"github.com/gin-gonic/gin"
+
 	"testing"
+
+	"github.com/gin-gonic/gin"
 )
 
 func initTestAPI(t *testing.T, middleware authmiddleware.AuthMiddleware, postgres *store.PostgresStore) *api {

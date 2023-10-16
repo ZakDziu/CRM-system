@@ -32,13 +32,7 @@ import (
 
 // @license.name  Apache 2.0
 // @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
-//
-//nolint:godox
 func main() {
-	// TODO:uncomment when you will use logger
-	// tele, closer := tel.New(context.Background(), tel.GetConfigFromEnv())
-	// ctx, cancel := context.WithCancel(tele.Ctx())
-
 	conf, err := config.New()
 	if err != nil {
 		logger.Fatalf("Can't read config file: %s", err)
@@ -88,10 +82,6 @@ func main() {
 		if err != nil {
 			logger.Infof("Can't shutdown API server: %s", err)
 		}
-
-		//TODO: and this too
-		// cancel()
-		// closer()
 	}
 }
 

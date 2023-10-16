@@ -19,25 +19,21 @@ type BaseClaims struct {
 	Role model.UserRole
 }
 
-// Claims represent set of fields stored in JWT payload.
 type AccessClaims struct {
 	BaseClaims
 	AccessUUID string `json:"access_uuid"`
 }
 
-// RefreshClaims represent JSON Web Token Claims for refresh token.
 type RefreshClaims struct {
 	BaseClaims
 	RefreshUUID string `json:"refresh_uuid"`
 }
 
-// Tokens represent user tokens
 type Tokens struct {
 	Access  string `json:"accessToken"`
 	Refresh string `json:"refreshToken"`
 }
 
-// NewClaims method for create BaseClaims with StandartClaims and user data
 func NewClaims(idClaims uuid.UUID, role model.UserRole, ttl time.Duration) BaseClaims {
 	return BaseClaims{
 		StandardClaims: jwt.StandardClaims{
@@ -50,7 +46,6 @@ func NewClaims(idClaims uuid.UUID, role model.UserRole, ttl time.Duration) BaseC
 	}
 }
 
-// Generate Access and Refresh Claims
 func GenerateClaims(idClaims uuid.UUID, role model.UserRole) (*AccessClaims, *RefreshClaims) {
 	access := AccessClaims{
 		BaseClaims: NewClaims(idClaims, role, AccessTokenTTL),

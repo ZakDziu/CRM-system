@@ -1,20 +1,20 @@
 package logger
 
 import (
-	f "fmt"
 	"path/filepath"
 	"runtime"
 	"strings"
 
-	"github.com/tel-io/tel/v2"
+	log "github.com/sirupsen/logrus"
 )
 
 func Debugf(format string, args ...interface{}) {
-	tel.Global().Debug(f.Sprintf(format, args...))
+	log.Debugf(format, args...)
 }
 
 func Infof(format string, args ...interface{}) {
-	tel.Global().Info(f.Sprintf(format, args...))
+	log.Infof(format, args...)
+
 }
 
 func Errorf(action string, err interface{}) {
@@ -26,10 +26,9 @@ func Errorf(action string, err interface{}) {
 		splited := strings.Split(toSplit, ".")
 		function = splited[len(splited)-1]
 	}
-	message := f.Sprintf("%s --> func %s --> action %v --> error: %v", filename, function, action, err)
-	tel.Global().Error(message)
+	log.Errorf("%s --> func %s --> action %v --> error: %v", filename, function, action, err)
 }
 
 func Fatalf(format string, args ...interface{}) {
-	tel.Global().Fatal(f.Sprintf(format, args...))
+	log.Fatalf(format, args...)
 }
